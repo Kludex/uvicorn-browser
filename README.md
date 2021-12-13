@@ -19,6 +19,8 @@
   <img src="https://user-images.githubusercontent.com/7353520/145871783-f0a08a45-4baf-4f8a-bd48-c3747c4f1e37.gif" alt="uvicorn-browser" />
 </p>
 
+This project is inspired by [autoreload](https://github.com/ChillFish8/autoreload/tree/master).
+
 ## Installation
 
 ```bash
