@@ -9,14 +9,10 @@ target-version = ['py38']
 profile = "black"
 
 [tool.mypy]
-check_untyped_defs = true
-disallow_any_generics = true
-disallow_incomplete_defs = true
-disallow_untyped_defs = true
-no_implicit_optional = true
 show_error_codes = true
-warn_unreachable = true
-warn_unused_ignores = true
+follow_imports = "skip"
+follow_imports_for_stubs = false
+ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "tests.*"

@@ -1,11 +1,12 @@
+import sys
 from typing import Union
 
 from selenium import webdriver
 
-try:
-    from typing import Literal
-except ImportError:
+if sys.version_info < (3, 8):
     from typing_extensions import Literal
+else:
+    from typing import Literal
 
 
 class RefreshableDriver:
@@ -36,3 +37,5 @@ def get_driver(flavour: str) -> Union[webdriver.Firefox, webdriver.Chrome]:
         return webdriver.Firefox(executable_path="geckodriver", firefox_profile=profile)
     elif flavour == "chrome":
         return webdriver.Chrome(executable_path="chromedriver")
+
+    raise ValueError(f"Unknown driver flavour: {flavour}")
