@@ -12,8 +12,16 @@ from uvicorn.server import Server
 from uvicorn_browser.reload import BrowserReload
 
 url_reloader = click.option("--reload-url", default=None, help="URL to reload.")
+driver = click.option(
+    "--driver",
+    default="chrome",
+    help=(
+        "Browser driver. Only used if reload-url is set."
+        "Supported: 'chrome', 'firefox.'"
+    ),
+)
 
-uvicorn_main = url_reloader(uvicorn_main)
+uvicorn_main = driver(url_reloader(uvicorn_main))
 
 
 def decorator(func):
@@ -31,9 +39,10 @@ def decorator(func):
         kwargs["reload_excludes"] = reload_excludes if reload_excludes else None
 
         reload_url = kwargs.pop("reload_url")
+        driver = kwargs.pop("driver")
         if reload_url:
             kwargs["reload"] = True
-            run(**kwargs, reload_url=reload_url)
+            run(**kwargs, reload_url=reload_url, driver=driver)
         else:
             func(**kwargs)
 
@@ -44,7 +53,7 @@ uvicorn_main.callback = decorator(uvicorn_main.callback)
 main = uvicorn_main
 
 
-def run(reload_url: str, **kwargs: Any) -> None:
+def run(reload_url: str, driver: str, **kwargs: Any) -> None:
     app_dir = kwargs.pop("app_dir", None)
     if app_dir is not None:
         sys.path.insert(0, app_dir)
@@ -61,7 +70,7 @@ def run(reload_url: str, **kwargs: Any) -> None:
         sys.exit(1)
 
     sock = config.bind_socket()
-    BrowserReload(config, target=server.run, sockets=[sock], url=reload_url).run()
+    BrowserReload(reload_url, driver, config, target=server.run, sockets=[sock]).run()
 
     if config.uds:
         os.remove(config.uds)

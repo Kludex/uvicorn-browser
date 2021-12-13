@@ -13,10 +13,11 @@ from uvicorn_browser.driver import RefreshableDriver
 class BrowserReload(BaseReload):
     def __init__(
         self,
+        url: str,
+        driver: str,
         config: Config,
         target: Callable[[Optional[List[socket]]], None],
         sockets: List[socket],
-        url: str,
     ) -> None:
         super().__init__(config, target, sockets)
         self.reloader_name = "browser"
@@ -29,7 +30,7 @@ class BrowserReload(BaseReload):
             reload_dirs.append(Path.cwd())
         for w in reload_dirs:
             self.watchers.append(CustomWatcher(w.resolve(), self.config))
-        self.driver = RefreshableDriver(url=url, flavour="chrome")
+        self.driver = RefreshableDriver(url=url, flavour=driver)
 
     def startup(self) -> None:
         super().startup()
