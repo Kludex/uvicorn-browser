@@ -27,6 +27,16 @@ This project is inspired by [autoreload](https://github.com/ChillFish8/autoreloa
 pip install uvicorn-browser
 ```
 
+## Usage
+
+Run `uvicorn-browser --help` to see all options. Those are the [same as `uvicorn`](https://www.uvicorn.org/deployment/#running-from-the-command-line), plus those:
+
+```bash
+  --reload-url TEXT               URL to reload.
+  --driver TEXT                   Browser driver. Only used if reload-url is
+                                  set. Supported: 'chrome', 'firefox.'
+```
+
 ## License
 
 This project is licensed under the terms of the MIT license.
