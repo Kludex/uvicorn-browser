@@ -11,6 +11,11 @@ from uvicorn.server import Server
 
 from uvicorn_browser.reload import BrowserReload
 
+if sys.version_info < (3, 8):
+    from typing_extensions import Literal
+else:
+    from typing import Literal
+
 url_reloader = click.option("--reload-url", default=None, help="URL to reload.")
 driver = click.option(
     "--driver",
@@ -53,7 +58,7 @@ uvicorn_main.callback = decorator(uvicorn_main.callback)
 main = uvicorn_main
 
 
-def run(reload_url: str, driver: str, **kwargs: Any) -> None:
+def run(reload_url: str, driver: Literal["chrome", "firefox"], **kwargs: Any) -> None:
     app_dir = kwargs.pop("app_dir", None)
     if app_dir is not None:
         sys.path.insert(0, app_dir)

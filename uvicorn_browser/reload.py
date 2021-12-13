@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from socket import socket
 from time import sleep
@@ -9,12 +10,17 @@ from uvicorn.supervisors.watchgodreload import CustomWatcher, logger
 
 from uvicorn_browser.driver import RefreshableDriver
 
+if sys.version_info < (3, 8):
+    from typing_extensions import Literal
+else:
+    from typing import Literal
+
 
 class BrowserReload(BaseReload):
     def __init__(
         self,
         url: str,
-        driver: str,
+        driver: Literal["chrome", "firefox"],
         config: Config,
         target: Callable[[Optional[List[socket]]], None],
         sockets: List[socket],
