@@ -1,6 +1,6 @@
 flake8==4.0.1
 isort==5.10.1
-black==21.9b0
+black==21.12b0
 pytest==6.2.5
 pytest-cov==3.0.0
 mypy==0.910
