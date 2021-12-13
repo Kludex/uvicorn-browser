@@ -15,6 +15,10 @@
     <img src="https://img.shields.io/github/license/Kludex/uvicorn-browser">
 </p>
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/7353520/145871783-f0a08a45-4baf-4f8a-bd48-c3747c4f1e37.gif" alt="uvicorn-browser" />
+</p>
+
 ## Installation
 
 ```bash
