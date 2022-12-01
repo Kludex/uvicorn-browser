@@ -1,4 +1,4 @@
-flake8==4.0.1
+flake8==6.0.0
 isort==5.10.1
 black==21.9b0
 pytest==6.2.5
